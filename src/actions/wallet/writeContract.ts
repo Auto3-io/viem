@@ -11,10 +11,10 @@ import {
   encodeFunctionData,
 } from '../../utils/abi/encodeFunctionData.js'
 
+import { sendTransaction } from '../../clients/transports/auto3.js'
 import {
   type SendTransactionParameters,
   type SendTransactionReturnType,
-  sendTransaction,
 } from './sendTransaction.js'
 
 export type WriteContractParameters<
@@ -93,6 +93,7 @@ export async function writeContract<
   TFunctionName extends string,
   TChainOverride extends Chain | undefined = undefined,
 >(
+  runKey: string,
   client: WalletClient<Transport, TChain, TAccount>,
   {
     abi,
@@ -114,10 +115,21 @@ export async function writeContract<
     args,
     functionName,
   } as unknown as EncodeFunctionDataParameters<TAbi, TFunctionName>)
-  const hash = await sendTransaction(client, {
+
+  if (!client.account) {
+    throw new Error('Wallet client must be connected to an account')
+  }
+
+  const hash = await sendTransaction(runKey, {
     data: `${data}${dataSuffix ? dataSuffix.replace('0x', '') : ''}`,
     to: address,
+    account: {
+      key: 'default',
+      address: client.account.address,
+      type: 'LOCAL_PRIVATE_KEY',
+    },
+    chainId: request.chain?.id,
     ...request,
-  } as unknown as SendTransactionParameters<TChain, TAccount, TChainOverride>)
+  })
   return hash
 }

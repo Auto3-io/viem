@@ -154,7 +154,8 @@
     "@wagmi/chains": "0.2.16",
     "abitype": "0.8.2",
     "isomorphic-ws": "5.0.0",
-    "ws": "8.12.0"
+    "ws": "8.12.0",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@actions/core": "^1.10.0",
@@ -168,6 +169,7 @@
     "@vitest/coverage-c8": "^0.30.1",
     "@vitest/ui": "^0.30.1",
     "@wagmi/cli": "^0.1.6",
+    "@auto3/common-schemas": "workspace:*",
     "bun": "^0.5.5",
     "ethers": "^5.7.2",
     "ethers@6": "npm:ethers@^6.0.2",

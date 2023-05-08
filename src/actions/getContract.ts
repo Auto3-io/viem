@@ -413,6 +413,7 @@ export function getContract<
         {
           get(_, functionName: string) {
             return (
+              runKey: string,
               ...parameters: [
                 args?: readonly unknown[],
                 options?: Omit<
@@ -422,7 +423,7 @@ export function getContract<
               ]
             ) => {
               const { args, options } = getFunctionParameters(parameters)
-              return readContract(publicClient, {
+              return readContract(runKey, publicClient, {
                 abi,
                 address,
                 functionName,
@@ -560,6 +561,7 @@ export function getContract<
         {
           get(_, functionName: string) {
             return (
+              runKey: string,
               ...parameters: [
                 args?: readonly unknown[],
                 options?: Omit<
@@ -569,7 +571,7 @@ export function getContract<
               ]
             ) => {
               const { args, options } = getFunctionParameters(parameters)
-              return writeContract(walletClient, {
+              return writeContract(runKey, walletClient, {
                 abi,
                 address,
                 functionName,
@@ -646,11 +648,13 @@ type GetReadFunction<
   >,
 > = Narrowable extends true
   ? (
+      runKey: string,
       ...parameters: Args extends readonly []
         ? [options?: Options]
         : [args: Args, options?: Options]
     ) => Promise<ReadContractReturnType<TAbi, TFunctionName>>
   : (
+      runKey: string,
       ...parameters:
         | [options?: Options]
         | [args: readonly unknown[], options?: Options]
@@ -763,6 +767,7 @@ type GetWriteFunction<
         ? [options: Options]
         : [options?: Options],
     >(
+      runKey: string,
       ...parameters: Args extends readonly []
         ? Rest
         : [args: Args, ...parameters: Rest]
@@ -785,6 +790,7 @@ type GetWriteFunction<
         ? [options: Options]
         : [options?: Options],
     >(
+      runKey: string,
       ...parameters: Rest | [args: readonly unknown[], ...parameters: Rest]
     ) => Promise<WriteContractReturnType>
 

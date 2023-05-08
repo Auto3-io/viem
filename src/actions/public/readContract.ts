@@ -18,6 +18,7 @@ import {
 } from '../../utils/abi/encodeFunctionData.js'
 import { getContractError } from '../../utils/errors/getContractError.js'
 
+import { runWithKey } from '../../index.js'
 import { type CallParameters, call } from './call.js'
 
 export type ReadContractParameters<
@@ -67,6 +68,7 @@ export async function readContract<
   TAbi extends Abi | readonly unknown[],
   TFunctionName extends string,
 >(
+  runKey: string,
   client: PublicClient<Transport, TChain>,
   {
     abi,
@@ -82,11 +84,14 @@ export async function readContract<
     functionName,
   } as unknown as EncodeFunctionDataParameters<TAbi, TFunctionName>)
   try {
-    const { data } = await call(client, {
-      data: calldata,
-      to: address,
-      ...callRequest,
-    } as unknown as CallParameters)
+    const { data } = await runWithKey(runKey, async () => {
+      return await call(client, {
+        data: calldata,
+        to: address,
+        ...callRequest,
+      } as unknown as CallParameters)
+    })
+
     return decodeFunctionResult({
       abi,
       args,

@@ -75,7 +75,7 @@ test('estimateGas', async () => {
 
 test('read', async () => {
   await expect(
-    contract.read.balanceOf([accounts[0].address]),
+    contract.read.balanceOf('', [accounts[0].address]),
   ).resolves.toBeDefined()
 })
 
@@ -139,7 +139,7 @@ test('watchEvent', async () => {
 
 test('write', async () => {
   await expect(
-    contract.write.mint({
+    contract.write.mint('', {
       account: accounts[0].address,
     }),
   ).resolves.toBeDefined()
@@ -167,7 +167,7 @@ test('js reserved keywords/prototype methods as abi item names', async () => {
     publicClient,
   })
   await expect(
-    contractNoIndexedEventArgs.read.constructor(),
+    contractNoIndexedEventArgs.read.constructor(''),
   ).rejects.toThrowErrorMatchingInlineSnapshot(`
     "The contract function \\"constructor\\" reverted.
 
@@ -179,7 +179,7 @@ test('js reserved keywords/prototype methods as abi item names', async () => {
     Version: viem@1.0.2"
   `)
   await expect(
-    contractNoIndexedEventArgs.read.function(['function']),
+    contractNoIndexedEventArgs.read.function('', ['function']),
   ).rejects.toThrowErrorMatchingInlineSnapshot(`
     "The contract function \\"function\\" reverted.
 

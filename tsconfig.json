@@ -1,17 +1,22 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "exclude": [],
   "references": [
     {
       "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "../common-schemas"
     }
   ],
   "compilerOptions": {
     "resolveJsonModule": true,
     "outDir": "../../.moon/cache/types/packages/viem",
-    "composite": true
-  },
+    "composite": true,
+    "paths": {
+      "@auto3/common-schemas": ["../../packages/common-schemas/src/index.ts"],
+      "@auto3/common-schemas/*": ["../../packages/common-schemas/src/*"]
+    }
+  }
 }
