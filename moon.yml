@@ -1,0 +1,10 @@
+tasks:
+  build:
+    command: pnpm build
+    platform: system
+    options:
+      runDepsInParallel: false
+      mergeInputs: 'replace'
+      mergeOutputs: 'replace'
+      mergeArgs: 'replace'
+      mergeDeps: 'replace'

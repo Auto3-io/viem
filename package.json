@@ -19,7 +19,6 @@
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
     "playground": "pnpm --filter playground-browser dev",
-    "postinstall": "pnpm contracts:build",
     "preinstall": "npx only-allow pnpm",
     "prepare": "npx simple-git-hooks",
     "prepublishOnly": "pnpm bun scripts/prepublishOnly.ts",
@@ -208,11 +207,7 @@
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"
   },
-  "packageManager": "pnpm@8.3.1",
   "pnpm": {
-    "overrides": {
-      "viem": "workspace:*"
-    },
     "patchedDependencies": {
       "vitepress@1.0.0-alpha.61": "patches/vitepress@1.0.0-alpha.61.patch"
     },
