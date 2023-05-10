@@ -20,7 +20,7 @@ import { writeContract } from './writeContract.js'
 
 test('default', async () => {
   expect(
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...wagmiContractConfig,
       account: accounts[0].address,
       functionName: 'mint',
@@ -30,7 +30,7 @@ test('default', async () => {
 
 test('inferred account', async () => {
   expect(
-    await writeContract(walletClientWithAccount, {
+    await writeContract('', walletClientWithAccount, {
       ...wagmiContractConfig,
       functionName: 'mint',
     }),
@@ -43,7 +43,7 @@ test('client chain mismatch', async () => {
     transport: http(localHttpUrl),
   })
   await expect(() =>
-    writeContract(walletClient, {
+    writeContract('', walletClient, {
       ...wagmiContractConfig,
       account: accounts[0].address,
       functionName: 'mint',
@@ -69,7 +69,7 @@ test('no chain', async () => {
   })
   await expect(() =>
     // @ts-expect-error
-    writeContract(walletClient, {
+    writeContract('', walletClient, {
       ...wagmiContractConfig,
       account: accounts[0].address,
       functionName: 'mint',
@@ -94,7 +94,7 @@ describe('args: chain', () => {
     })
 
     expect(
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...wagmiContractConfig,
         account: accounts[0].address,
         functionName: 'mint',
@@ -105,7 +105,7 @@ describe('args: chain', () => {
 
   test('chain mismatch', async () => {
     await expect(() =>
-      writeContract(walletClient, {
+      writeContract('', walletClient, {
         ...wagmiContractConfig,
         account: accounts[0].address,
         functionName: 'mint',
@@ -130,7 +130,7 @@ describe('args: chain', () => {
 
 test('args: dataSuffix', async () => {
   const spy = vi.spyOn(sendTransaction, 'sendTransaction')
-  await writeContract(walletClient, {
+  await writeContract('', walletClient, {
     ...wagmiContractConfig,
     account: accounts[0].address,
     functionName: 'mint',
@@ -145,7 +145,7 @@ test('args: dataSuffix', async () => {
 
 test('overloaded function', async () => {
   expect(
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...wagmiContractConfig,
       account: accounts[0].address,
       functionName: 'mint',
@@ -160,7 +160,7 @@ test('w/ simulateContract', async () => {
     account: accounts[0].address,
     functionName: 'mint',
   })
-  expect(await writeContract(walletClient, request)).toBeDefined()
+  expect(await writeContract('', walletClient, request)).toBeDefined()
 
   await mine(testClient, { blocks: 1 })
 
@@ -180,7 +180,7 @@ test('w/ simulateContract (overloaded)', async () => {
     functionName: 'mint',
     args: [69421n],
   })
-  expect(await writeContract(walletClient, request)).toBeDefined()
+  expect(await writeContract('', walletClient, request)).toBeDefined()
 
   await mine(testClient, { blocks: 1 })
 
@@ -214,7 +214,7 @@ test('w/ simulateContract (args chain mismatch)', async () => {
     chain: optimism,
   })
   await expect(() =>
-    writeContract(walletClient, request),
+    writeContract('', walletClient, request),
   ).rejects.toThrowErrorMatchingInlineSnapshot(`
     "The current chain of the wallet (id: 1) does not match the target chain for the transaction (id: 10 – Optimism).
 
@@ -242,7 +242,7 @@ test('w/ simulateContract (client chain mismatch)', async () => {
     functionName: 'mint',
   })
   await expect(() =>
-    writeContract(walletClient, request),
+    writeContract('', walletClient, request),
   ).rejects.toThrowErrorMatchingInlineSnapshot(`
     "The current chain of the wallet (id: 1) does not match the target chain for the transaction (id: 10 – Optimism).
 

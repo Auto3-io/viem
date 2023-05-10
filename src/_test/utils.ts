@@ -249,7 +249,7 @@ export async function setVitalikResolver() {
   await impersonateAccount(testClient, {
     address: address.vitalik,
   })
-  await writeContract(walletClient, {
+  await writeContract('', walletClient, {
     ...ensRegistryConfig,
     account: address.vitalik,
     functionName: 'setResolver',

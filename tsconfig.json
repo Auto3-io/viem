@@ -15,8 +15,8 @@
     "outDir": "../../.moon/cache/types/packages/viem",
     "composite": true,
     "paths": {
-      "@auto3/common-schemas": ["../../packages/common-schemas/src/index.ts"],
-      "@auto3/common-schemas/*": ["../../packages/common-schemas/src/*"]
+      "@auto3/common-schemas": ["../common-schemas/src/index.ts"],
+      "@auto3/common-schemas/*": ["../common-schemas/src/*"]
     }
   }
 }

@@ -1,10 +1,37 @@
+fileGroups:
+  srcInputs:
+    - src/**/*
+
 tasks:
   build:
-    command: pnpm build
-    platform: system
+    command: noop
+    deps:
+      - ~:clean
+      - ~:build-cjs
+      - ~:build-esm
+      - ~:build-types
+    platform: node
     options:
       runDepsInParallel: false
       mergeInputs: 'replace'
       mergeOutputs: 'replace'
       mergeArgs: 'replace'
       mergeDeps: 'replace'
+  build-cjs:
+    command: pnpm tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'
+    platform: system
+    # inputs:
+    # - src/**/*.ts
+  build-esm:
+    command: pnpm tsc --project tsconfig.build.json --module es2015 --outDir ./dist/esm --removeComments && echo > ./dist/esm/package.json '{\"type\":\"module\"}'
+    platform: system
+    inputs:
+      - files(srcInputs)
+  build-types:
+    command: pnpm tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap
+    platform: system
+    inputs:
+      - files(srcInputs)
+  clean:
+    command: rimraf dist
+    platform: node

@@ -123,13 +123,13 @@ test('default', async () => {
 
 describe('events', () => {
   test('no args', async () => {
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
       account: address.vitalik,
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
@@ -143,13 +143,13 @@ describe('events', () => {
   })
 
   test('args: event', async () => {
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
       account: address.vitalik,
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
@@ -221,25 +221,25 @@ describe('events', () => {
   })
 
   test('args: singular `from`', async () => {
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.usdcHolder,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'approve',
@@ -287,25 +287,25 @@ describe('events', () => {
   })
 
   test('args: multiple `from`', async () => {
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.usdcHolder,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'approve',
@@ -341,25 +341,25 @@ describe('events', () => {
   })
 
   test('args: singular `to`', async () => {
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.usdcHolder,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'approve',
@@ -395,25 +395,25 @@ describe('events', () => {
   })
 
   test('args: multiple `to`', async () => {
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.usdcHolder,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       account: address.vitalik,
       functionName: 'approve',
@@ -477,20 +477,20 @@ describe('skip invalid logs', () => {
   test('indexed params mismatch', async () => {
     const { contractAddress } = await deployErc20InvalidTransferEvent()
 
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
       account: address.vitalik,
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       abi: erc20InvalidTransferEventABI,
       address: contractAddress!,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
       account: address.vitalik,
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       abi: erc20InvalidTransferEventABI,
       address: contractAddress!,
       functionName: 'transfer',
@@ -507,20 +507,20 @@ describe('skip invalid logs', () => {
   test('non-indexed params mismatch', async () => {
     const { contractAddress } = await deployErc20InvalidTransferEvent()
 
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
       account: address.vitalik,
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       abi: erc20InvalidTransferEventABI,
       address: contractAddress!,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
       account: address.vitalik,
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       abi: erc20InvalidTransferEventABI,
       address: contractAddress!,
       functionName: 'transfer',

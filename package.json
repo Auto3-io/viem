@@ -5,7 +5,7 @@
   "scripts": {
     "bench": "vitest bench",
     "bench:ci": "CI=true vitest bench",
-    "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
+    "build": "pnpm run clean && pnpm run build:types && pnpm run build:cjs && pnpm run build:esm",
     "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
     "build:esm": "tsc --project tsconfig.build.json --module es2015 --outDir ./dist/esm --removeComments && echo > ./dist/esm/package.json '{\"type\":\"module\"}'",
     "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
@@ -173,7 +173,7 @@
     "@viem/anvil": "0.0.5",
     "@vitest/coverage-c8": "^0.30.1",
     "@vitest/ui": "^0.30.1",
-    "@wagmi/cli": "^0.1.6",
+    "@wagmi/cli": "^1.0.0",
     "@auto3/common-schemas": "workspace:*",
     "bun": "^0.5.5",
     "ethers": "^5.7.2",

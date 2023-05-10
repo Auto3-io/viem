@@ -95,20 +95,20 @@ test(
     })
 
     await wait(1000)
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
       account: address.vitalik,
     })
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[0].address, 1n],
       account: address.vitalik,
     })
     await wait(1000)
-    await writeContract(walletClient, {
+    await writeContract('', walletClient, {
       ...usdcContractConfig,
       functionName: 'transfer',
       args: [accounts[1].address, 1n],
@@ -133,20 +133,20 @@ test('args: batch', async () => {
   })
 
   await wait(1000)
-  await writeContract(walletClient, {
+  await writeContract('', walletClient, {
     ...usdcContractConfig,
     functionName: 'transfer',
     args: [accounts[0].address, 1n],
     account: address.vitalik,
   })
-  await writeContract(walletClient, {
+  await writeContract('', walletClient, {
     ...usdcContractConfig,
     functionName: 'transfer',
     args: [accounts[0].address, 1n],
     account: address.vitalik,
   })
   await wait(1000)
-  await writeContract(walletClient, {
+  await writeContract('', walletClient, {
     ...usdcContractConfig,
     functionName: 'transfer',
     args: [accounts[1].address, 1n],
@@ -175,7 +175,7 @@ test('args: address', async () => {
   })
 
   await wait(1000)
-  await writeContract(walletClient, {
+  await writeContract('', walletClient, {
     ...usdcContractConfig,
     functionName: 'transfer',
     args: [accounts[0].address, 1n],
@@ -205,7 +205,7 @@ test('args: address + event', async () => {
   })
 
   await wait(1000)
-  await writeContract(walletClient, {
+  await writeContract('', walletClient, {
     ...usdcContractConfig,
     functionName: 'transfer',
     args: [accounts[0].address, 1n],
@@ -248,20 +248,20 @@ describe('`getLogs` fallback', () => {
       })
 
       await wait(1000)
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...usdcContractConfig,
         functionName: 'transfer',
         args: [accounts[0].address, 1n],
         account: address.vitalik,
       })
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...usdcContractConfig,
         functionName: 'transfer',
         args: [accounts[0].address, 1n],
         account: address.vitalik,
       })
       await wait(2000)
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...usdcContractConfig,
         functionName: 'transfer',
         args: [accounts[1].address, 1n],
@@ -298,20 +298,20 @@ describe('`getLogs` fallback', () => {
       })
 
       await wait(1000)
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...usdcContractConfig,
         functionName: 'transfer',
         args: [accounts[0].address, 1n],
         account: address.vitalik,
       })
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...usdcContractConfig,
         functionName: 'transfer',
         args: [accounts[1].address, 1n],
         account: address.usdcHolder,
       })
       await wait(1000)
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...usdcContractConfig,
         functionName: 'transfer',
         args: [accounts[2].address, 1n],
@@ -319,13 +319,13 @@ describe('`getLogs` fallback', () => {
       })
       await mine(testClient, { blocks: 2 })
       await wait(1000)
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...usdcContractConfig,
         functionName: 'transfer',
         args: [accounts[2].address, 1n],
         account: address.vitalik,
       })
-      await writeContract(walletClient, {
+      await writeContract('', walletClient, {
         ...usdcContractConfig,
         functionName: 'transfer',
         args: [accounts[2].address, 1n],

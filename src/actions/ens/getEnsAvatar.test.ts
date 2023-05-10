@@ -188,7 +188,7 @@ describe('args: gateways', async () => {
 })
 
 async function setEnsAvatar(avatar: string) {
-  await writeContract(walletClient, {
+  await writeContract('', walletClient, {
     ...ensPublicResolverConfig,
     account: address.vitalik,
     functionName: 'setText',
