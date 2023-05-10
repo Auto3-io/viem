@@ -79,7 +79,7 @@ export async function getEnsName<TChain extends Chain | undefined>(
 
   const reverseNode = `${address.toLowerCase().substring(2)}.addr.reverse`
   try {
-    const res = await readContract(client, {
+    const res = await readContract('', client, {
       address: universalResolverAddress,
       abi: [
         {

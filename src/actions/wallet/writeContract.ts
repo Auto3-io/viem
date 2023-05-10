@@ -61,7 +61,7 @@ export type WriteContractReturnType = SendTransactionReturnType
  *   chain: mainnet,
  *   transport: custom(window.ethereum),
  * })
- * const hash = await writeContract(client, {
+ * const hash = await writeContract('', client, {
  *   address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
  *   abi: parseAbi(['function mint(uint32 tokenId) nonpayable']),
  *   functionName: 'mint',
@@ -84,7 +84,7 @@ export type WriteContractReturnType = SendTransactionReturnType
  *   functionName: 'mint',
  *   args: [69420],
  * }
- * const hash = await writeContract(client, request)
+ * const hash = await writeContract('', client, request)
  */
 export async function writeContract<
   TChain extends Chain | undefined,

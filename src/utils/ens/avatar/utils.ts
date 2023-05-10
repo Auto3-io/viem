@@ -217,7 +217,7 @@ export async function getNftTokenUri<TChain extends Chain | undefined>(
   { nft }: { nft: ParsedNft },
 ) {
   if (nft.namespace === 'erc721') {
-    return readContract(client, {
+    return readContract('', client, {
       address: nft.contractAddress,
       abi: [
         {
@@ -233,7 +233,7 @@ export async function getNftTokenUri<TChain extends Chain | undefined>(
     })
   }
   if (nft.namespace === 'erc1155') {
-    return readContract(client, {
+    return readContract('', client, {
       address: nft.contractAddress,
       abi: [
         {

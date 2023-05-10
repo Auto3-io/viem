@@ -174,7 +174,7 @@ export async function multicall<
 
   const results = await Promise.all(
     chunkedCalls.map((calls) =>
-      readContract(client, {
+      readContract('', client, {
         abi: multicall3Abi,
         address: multicallAddress!,
         args: [calls],

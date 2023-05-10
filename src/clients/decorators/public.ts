@@ -1371,7 +1371,7 @@ export const publicActions: <
   getTransactionCount: (args) => getTransactionCount(client, args),
   getTransactionReceipt: (args) => getTransactionReceipt(client, args),
   multicall: (args) => multicall(client, args),
-  readContract: (args) => readContract(client, args),
+  readContract: (args) => readContract('', client, args),
   simulateContract: (args) => simulateContract(client, args),
   uninstallFilter: (args) => uninstallFilter(client, args),
   waitForTransactionReceipt: (args) => waitForTransactionReceipt(client, args),
