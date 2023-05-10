@@ -11,6 +11,8 @@ import type {
   Narrow,
 } from 'abitype'
 
+export type { Abi } from 'abitype'
+
 import type { Account } from '../accounts/types.js'
 import type { PublicClient } from '../clients/createPublicClient.js'
 import type { WalletClient } from '../clients/createWalletClient.js'
