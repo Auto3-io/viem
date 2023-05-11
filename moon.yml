@@ -1,6 +1,8 @@
 fileGroups:
-  srcInputs:
-    - src/**/*
+  sources:
+    - 'src/**/*'
+    - 'src/wallet.ts'
+    - 'tsconfig.build.json'
 
 tasks:
   build:
@@ -20,18 +22,20 @@ tasks:
   build-cjs:
     command: pnpm tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'
     platform: system
-    # inputs:
-    # - src/**/*.ts
+    inputs:
+      - '@group(sources)'
+    outputs:
+      - 'dist/cjs'
   build-esm:
-    command: pnpm tsc --project tsconfig.build.json --module es2015 --outDir ./dist/esm --removeComments && echo > ./dist/esm/package.json '{\"type\":\"module\"}'
+    command: pnpm tsc --project tsconfig.build.json --module es2020 --outDir ./dist/esm --removeComments && echo > ./dist/esm/package.json '{\"type\":\"module\"}'
     platform: system
     inputs:
-      - files(srcInputs)
+      - '@group(sources)'
   build-types:
     command: pnpm tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap
     platform: system
     inputs:
-      - files(srcInputs)
+      - '@group(sources)'
   clean:
     command: rimraf dist
     platform: node
