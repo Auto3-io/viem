@@ -8,6 +8,9 @@
     },
     {
       "path": "../common-schemas"
+    },
+    {
+      "path": "../internal-bridge"
     }
   ],
   "compilerOptions": {
@@ -16,7 +19,9 @@
     "composite": true,
     "paths": {
       "@auto3/common-schemas": ["../common-schemas/src/index.ts"],
-      "@auto3/common-schemas/*": ["../common-schemas/src/*"]
+      "@auto3/common-schemas/*": ["../common-schemas/src/*"],
+      "@auto3/internal-bridge": ["../internal-bridge/src/index.ts"],
+      "@auto3/internal-bridge/*": ["../internal-bridge/src/*"]
     }
   }
 }

@@ -1,10 +1,7 @@
 import { custom } from './custom.js'
-import {
-  type TransactionRequest,
-  getProgramRun,
-  programRunLocalStorage,
-} from '@auto3/common-schemas'
+import { type TransactionRequest } from '@auto3/common-schemas'
 import { AsyncLocalStorage } from 'async_hooks'
+import { getProgramRun, programRunLocalStorage } from 'internal-bridge'
 import { z } from 'zod'
 
 export const runKeyStorage = new AsyncLocalStorage<string>()
@@ -31,7 +28,7 @@ export const ethResponseSchema = z.object({
 
 export async function sendTransaction(
   key: string,
-  transaction: TransactionRequest,
+  transaction: TransactionRequest
 ): Promise<`0x{$string}`> {
   const programRun = programRunLocalStorage.getStore()
 
@@ -45,7 +42,7 @@ export async function sendTransaction(
 
 export async function performETHRequest(
   key: string,
-  params: unknown,
+  params: unknown
 ): Promise<unknown> {
   const run = getProgramRun()
 
