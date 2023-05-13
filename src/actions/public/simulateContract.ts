@@ -22,6 +22,7 @@ import {
 import { getContractError } from '../../utils/errors/getContractError.js'
 import type { WriteContractParameters } from '../wallet/writeContract.js'
 
+import { runWithKey } from '../../index.js'
 import { type CallParameters, call } from './call.js'
 
 export type SimulateContractParameters<
@@ -98,6 +99,7 @@ export async function simulateContract<
   TFunctionName extends string,
   TChainOverride extends Chain | undefined,
 >(
+  runKey: string,
   client: PublicClient<Transport, TChain>,
   {
     abi,
@@ -119,12 +121,15 @@ export async function simulateContract<
     functionName,
   } as unknown as EncodeFunctionDataParameters<TAbi, TFunctionName>)
   try {
-    const { data } = await call(client, {
-      batch: false,
-      data: `${calldata}${dataSuffix ? dataSuffix.replace('0x', '') : ''}`,
-      to: address,
-      ...callRequest,
-    } as unknown as CallParameters<TChain>)
+    const { data } = await runWithKey(runKey, async () => {
+      return await call(client, {
+        batch: false,
+        data: `${calldata}${dataSuffix ? dataSuffix.replace('0x', '') : ''}`,
+        to: address,
+        ...callRequest,
+      } as unknown as CallParameters<TChain>)
+    })
+
     const result = decodeFunctionResult({
       abi,
       args,
