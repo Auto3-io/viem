@@ -681,11 +681,13 @@ type GetEstimateFunction<
   >,
 > = Narrowable extends true
   ? (
+      runKey: string,
       ...parameters: Args extends readonly []
         ? [options?: Options]
         : [args: Args, options?: Options]
     ) => Promise<EstimateContractGasReturnType>
   : (
+      runKey: string,
       ...parameters:
         | [options?: Options]
         | [args: readonly unknown[], options?: Options]
@@ -715,6 +717,7 @@ type GetSimulateFunction<
         >
       >,
     >(
+      runKey: string,
       ...parameters: Args extends readonly []
         ? [options?: Options]
         : [args: Args, options?: Options]
@@ -735,6 +738,7 @@ type GetSimulateFunction<
         >
       >,
     >(
+      runKey: string,
       ...parameters:
         | [options?: Options]
         | [args: readonly unknown[], options?: Options]
