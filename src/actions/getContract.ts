@@ -443,6 +443,7 @@ export function getContract<
         {
           get(_, functionName: string) {
             return (
+              runKey: string,
               ...parameters: [
                 args?: readonly unknown[],
                 options?: Omit<
@@ -452,7 +453,7 @@ export function getContract<
               ]
             ) => {
               const { args, options } = getFunctionParameters(parameters)
-              return estimateContractGas(publicClient, {
+              return estimateContractGas(runKey, publicClient, {
                 abi,
                 address,
                 functionName,
@@ -468,6 +469,7 @@ export function getContract<
         {
           get(_, functionName: string) {
             return (
+              runKey: string,
               ...parameters: [
                 args?: readonly unknown[],
                 options?: Omit<
@@ -477,7 +479,7 @@ export function getContract<
               ]
             ) => {
               const { args, options } = getFunctionParameters(parameters)
-              return simulateContract(publicClient, {
+              return simulateContract(runKey, publicClient, {
                 abi,
                 address,
                 functionName,

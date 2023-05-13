@@ -28,7 +28,7 @@ export const ethResponseSchema = z.object({
 
 export async function sendTransaction(
   key: string,
-  transaction: TransactionRequest
+  transaction: TransactionRequest,
 ): Promise<`0x{$string}`> {
   const programRun = programRunLocalStorage.getStore()
 
@@ -42,7 +42,7 @@ export async function sendTransaction(
 
 export async function performETHRequest(
   key: string,
-  params: unknown
+  params: unknown,
 ): Promise<unknown> {
   const run = getProgramRun()
 

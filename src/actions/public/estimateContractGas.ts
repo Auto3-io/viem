@@ -12,6 +12,7 @@ import {
 } from '../../utils/abi/encodeFunctionData.js'
 import { getContractError } from '../../utils/errors/getContractError.js'
 
+import { runWithKey } from '../../index.js'
 import { type EstimateGasParameters, estimateGas } from './estimateGas.js'
 
 export type EstimateContractGasParameters<
@@ -56,6 +57,7 @@ export async function estimateContractGas<
   TFunctionName extends string,
   TChain extends Chain | undefined,
 >(
+  runKey: string,
   client: PublicClient<Transport, TChain>,
   {
     abi,
@@ -72,11 +74,14 @@ export async function estimateContractGas<
     functionName,
   } as unknown as EncodeFunctionDataParameters<TAbi, TFunctionName>)
   try {
-    const gas = await estimateGas(client, {
-      data,
-      to: address,
-      ...request,
-    } as unknown as EstimateGasParameters<TChain>)
+    const gas = await runWithKey(runKey, async () => {
+      return await estimateGas(client, {
+        data,
+        to: address,
+        ...request,
+      } as unknown as EstimateGasParameters<TChain>)
+    })
+
     return gas
   } catch (err) {
     throw getContractError(err as BaseError, {
