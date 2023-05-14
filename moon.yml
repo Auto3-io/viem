@@ -8,6 +8,8 @@ tasks:
   build:
     command: noop
     deps:
+      - common-schemas:build
+      - internal-bridge:build
       - ~:clean
       - ~:build-cjs
       - ~:build-esm
