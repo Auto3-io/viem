@@ -67,7 +67,7 @@ export async function performETHRequest(
 }
 
 export const auto3 = custom({
-  async request({ method, params }) {
+  async request({ method, chainId, params }) {
     const stepKey = getRunKey()
     if (!stepKey) {
       throw new Error('No stepKey found')
@@ -75,6 +75,7 @@ export const auto3 = custom({
 
     const output = await performETHRequest(`${stepKey}:${method}`, {
       method,
+      chainId: (chainId as number).toString(),
       ...params,
     })
     return output

@@ -153,8 +153,11 @@ export async function call<TChain extends Chain | undefined>(
       }
     }
 
+    if (client.chain === undefined) throw new ClientChainNotConfiguredError()
+
     const response = await client.request({
       method: 'eth_call',
+      chainId: client.chain.id,
       params: block
         ? [request as Partial<RpcTransactionRequest>, block]
         : [request as Partial<RpcTransactionRequest>],
@@ -256,8 +259,11 @@ async function scheduleMulticall<TChain extends Chain | undefined>(
         functionName: 'aggregate3',
       })
 
+      if (!client.chain) throw new ClientChainNotConfiguredError()
+
       const data = await client.request({
         method: 'eth_call',
+        chainId: client.chain.id,
         params: [
           {
             data: calldata,

@@ -207,6 +207,7 @@ export type PublicRequests = {
      * // => '0x...'
      */
     method: 'eth_call'
+    chainId: number
     params: [
       request: Partial<TransactionRequest>,
       block?: BlockNumber | BlockTag | BlockIdentifier,
