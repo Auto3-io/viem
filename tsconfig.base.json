@@ -1,14 +1,6 @@
 {
   // This tsconfig file contains the shared config for the build (tsconfig.build.json) and type checking (tsconfig.json) config.
   "include": [],
-  "references": [
-    {
-      "path": "../common-schemas"
-    },
-    {
-      "path": "../internal-bridge"
-    }
-  ],
   "compilerOptions": {
     // Incremental builds
     // NOTE: Enabling incremental builds speeds up `tsc`. Keep in mind though that it does not reliably bust the cache when the `tsconfig.json` file changes.
@@ -45,14 +37,6 @@
     ],
 
     // Skip type checking for node modules
-    "skipLibCheck": true,
-    "paths": {
-      "@auto3/common-schemas": ["../common-schemas/src/index.ts"],
-      "@auto3/common-schemas/*": ["../common-schemas/src/*"],
-      "@auto3/internal-bridge": ["../internal-bridge/src/index.ts"],
-      "@auto3/internal-bridge/*": ["../internal-bridge/src/*"],
-      "internal-bridge": ["../internal-bridge/src/index.ts"],
-      "internal-bridge/*": ["../internal-bridge/src/*"]
-    }
+    "skipLibCheck": true
   }
 }
